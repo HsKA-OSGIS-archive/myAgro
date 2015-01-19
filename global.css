@@ -1,0 +1,180 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 12px;
+	height: 100%;
+	font-family: Arial, Tahoma, sans-serif;
+	background: #fff;
+	color: #343434;
+	overflow: hidden;
+}
+
+menu, nav, section { display: block; }
+ol, ul { list-style: none; }
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+p { line-height: 1.25em; margin-bottom: 20px; color: #444; }
+
+a.close {
+	display: inline-block;
+	background: #5574b4;
+	padding: 10px 8px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.4em;
+	text-decoration: none;
+	margin-bottom: 6px;
+}
+
+#base{
+	position: absolute;
+	right: 0px;
+	left: 250px;
+	height: 100%;
+	z-index: 3;
+	overflow: hidden;
+}
+
+#add{
+	display: block;
+	width: 328px;
+	background: #fff;
+	padding: 10px 11px;
+	padding-top: 35px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 90%;
+	overflow: scroll;
+	overflow-x: hidden;
+	z-index: 0;
+}
+
+#about{
+	display: block;
+	width: 328px;
+	background: #fff;
+	padding: 10px 11px;
+	padding-top: 35px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 90%;
+	overflow: scroll;
+	overflow-x: hidden;
+	z-index: 1;
+}
+
+#login{
+	display: block;
+	width: 328px;
+	background: #fff;
+	padding: 10px 11px;
+	padding-top: 35px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 90%;
+	overflow: scroll;
+	overflow-x: hidden;
+	z-index: 1;
+}
+
+#dist {
+	display: block;
+	width: 328px;
+	background: #fff;
+	padding: 10px 11px;
+	padding-top: 35px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 90%;
+	overflow: scroll;
+	overflow-x: hidden;
+	z-index: 1;
+}
+
+#mainpage {
+	width: 100%;
+	height: 100%;
+	display: block;
+	background: #aaa;
+	overflow: hidden;
+	position: absolute;
+	z-index: 2;
+	color: #fff;
+}
+
+#mainpage nav { 
+	position: absolute;
+	width: 250px; 
+	min-height: 100%;
+	padding-top: 50px;
+	background: #343638;
+}
+
+#mainpage nav h1 {
+	font-family: 'Trebuchet MS', Arial, sans-serif;
+	font-size: 2.85em;
+	line-height: 1.3em;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 11px;
+}
+
+#navigation { list-style: none; }
+#navigation li { display: block; margin-bottom: 2px; font-size: 1.4em; font-weight: bold; }
+#navigation li a { display: block; padding: 8px 6px; width: 100%; color: #d1e0f8; text-decoration: none; }
+#navigation li a:hover, #navigation li a.open { color: #fff; background: #484e57; }
+
+
+#content {
+	display: block;
+	margin-left: 250px;
+	padding: 0px 0px;
+	width: 100%;
+	height: 100%;
+}
+
+#content p {
+	color: #fff;
+	text-shadow: 2px 1px 0px rgba(0,0,0,0.7);
+}
+
+#title{
+	margin-left: 20px;
+	color: white;
+	font-size: 20pt;
+}
+
+#legdiv{
+	padding: 10px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	z-index: 4;
+	background-color: rgba(100,100,100,.6);
+}
+
+.popup .leaflet-popup-content-wrapper{
+	background:rgba(255,255,255,.8);
+	color:#2b423b;
+	font-size:16pt;
+	line-height:16px;
+}
+
+.popup .leaflet-popup-tip {
+	background: rgba(255,255,255,.8);
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+
+.popup .leaflet-popup-content {
+	margin: 6px 6px;
+	line-height: 1.4;
+}
