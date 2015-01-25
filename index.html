@@ -11,32 +11,50 @@
 		<link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 		
 		<script type='text/javascript' src='http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js?2'></script>
-		<script type='text/javascript' src='js/LeafletGeodesic.js'></script>
 		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<script type='text/javascript' src='js/pie.js'></script>
+		<script type='text/javascript' src='js/village.js'></script>
+		<script type='text/javascript' src='js/level2.js'></script>
+		<script type='text/javascript' src='js/level4.js'></script>
+		<script type='text/javascript' src='js/charts.js'></script>
 		<script type="text/javascript" charset="utf-8" src="js/nav.js"></script>
 	</head>
 	<body>
+		<script>var newobj; var diston = false; var charton = false; var addpointon = false;</script>
 		<div id="dist">
 			<a href="#" id="closebtn" class="close">Close</a>
-			<h2><input type="text" id="villagename" value="Choose a region" readonly style="border:0; background-color:rgba(255, 255, 255,.0); font-size: 20px; color:#666;width: 200px;"></h2>
+			<input type="text" id="villagename" value="Choose a village" readonly style="position:absolute;right:20px;text-align:right;border:0; background-color:rgba(255, 255, 255,.0); font-size: 24px;color:#333;width: 200px;">
+
 			
 			<span class="distance"></span>
 			
 		</div>
 		<div id="about">
+			<input type="text" id="chartname" value="Choose a region/village" readonly style="position:absolute;right:20px;text-align:right;border:0; background-color:rgba(255, 255, 255,.0); font-size: 24px; color:#333;width: 250px;">
+				<span id="chart1"></span>
+				<p id="charttitle">Packet Size Distribution</p>
+				<span id="chart2"></span>
+				<table id="pieleg" style="margin-left:30px;display:none;"><tr>
+					<td><div style="width:55px;height:15px;border:1px solid #fff;background-color: #848fb4;"></div></td>
+					<td><div style="width:55px;height:15px;border:1px solid #fff;background-color:#445183;"></div></td>
+					<td><div style="width:55px;height:15px;border:1px solid #fff;background-color:#76830d;"></div></td>
+					<td><div style="width:55px;height:15px;border:1px solid #fff;background-color:#bec585;"></div></td>
+				</tr><tr style="font-size:9pt;text-align:center;">
+					<td>male</td><td>female</td><td>female</td><td>male</td>
+				</tr><tr style="font-size:11pt;">
+					<td>Peanuts</td><td></td><td></td><td style="text-align:right;">Corn</td>
+				</tr></table>
 			<a href="#" id="closebtn4" class="close">Close</a>
-				<h2><input type="text" id="o" value="Choose a region" readonly style="border:0; background-color:rgba(255, 255, 255,.0); font-size: 20px; color:#666;width: 200px;"></h2>
-				
-				<!--CHARTS-->
 		</div>
 		<div id="login">
 			<a href="#" id="closebtn2" class="close">Close</a>
 			
 			<form id="loginform" method="post">
-				User name:<br/><input type="text" name="user" maxlength="12"><br/>
-				Password:<br/><input type="password" id="pass" name="pass" maxlength="12"><br/>
-				<button name = "submit" value="nothing" onclick="checkpass()">Submit</button>
+				<table id="logform"><tr><td>User name:</td><td><input type="text" name="user" maxlength="8"></td></tr>
+				<tr><td>Password:</td><td><input type="password" id="pass" name="pass" maxlength="8"></td></tr><tr><td></td><td>
+				<button id = "loginbutton" type = "button">Submit</button></table></td></tr>
 			</form>
 			
 		</div>
@@ -44,54 +62,59 @@
 			<a href="#" id="closebtn3" class="close">Close</a>
 			
 			<form id="addfeature">
-				<button name = "submit" value="nothing">Submit</button>
+				<table id="addform"><tr><td>
+				Agent Name:</td><td><input type="text" name="agent" id="agent" maxlength="12"></td></tr>
+				<tr><td>Location:</td><td><input type="text" name="lat" id="lat" maxlength="12"></td></tr>
+				<tr><td><button id = "locate" type="button">Get Location</button></td><td><input type="text" name="lng" id="lng" maxlength="12"></td></tr>
+				<tr><td>Farmer Name:</td><td><input type="text" id="farmer" name="farmer" maxlength="12"></td></tr>
+				<tr><td>Crop Type:</td><td><input type="text" id="croptype" name="croptype" maxlength="12"></td></tr>
+				<tr><td>Approx. Field Size:</td><td><input type="text" id="fieldsize" name="fieldsize" maxlength="6"> ha</td></tr><tr><td></td><td><button name = "send" value="nothing">Send</button></td></tr></table>
 			</form>
+			
+			<span id="finish"></span>
 			
 		</div>
 		<div id="mainpage">
 			<nav>
+			
+				<p id ="title"><img src="http://www.myagro.org/wp-content/uploads/2012/08/myagrogreen_2.png" width="100px"><br/></p>
 				
-				<img src="http://www.myagro.org/wp-content/uploads/2012/08/myagrogreen_2.png" width="100px">
-				<p id ="title">Where myAgro Works</p>
+				
+				
 				<ul id="navigation">
 					<li><a href="#dist">Distances</a></li>
 					<li><a href="#about">Charts</a></li>
 					<li><a href="#login">Log-in</a></li>
-					<li><a href="#add">Add Feature</a></li>
+					<li><a href="#add" class="disabled">Add Feature</a></li>
 				</ul>
 			</nav>
 			<div id="content"> 
-				<div id="base">
-					<div id = "legdiv"><table id = "legend">
-						<tr>
-							<td><div style="width:45px;height:30px;border:1px solid #fff;background-color: rgba(203, 231, 225,.7);"></div></td>
-							<td><input type="text" id="leg1" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff; width: 100px;"></td>
-						</tr>
-						<tr>
-							<td><div style="width:45px;height:30px;border:1px solid #fff;background-color:rgba(137, 189, 177,.7);"></div></td>
-							<td><input type="text" id="leg2" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff;width: 100px;"></td>
-						</tr>
-						<tr>
-							<td><div style="width:45px;height:30px;border:1px solid #fff;background-color:rgba(79, 135, 122,.7);"></div></td>
-							<td><input type="text" id="leg3" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff;width: 100px;"></td>
-						</tr>
-						<tr>
-							<td><div style="width:45px;height:30px;border:1px solid #fff;background-color:rgba(38, 92, 79,.7);"></div></td>
-							<td><input type="text" id="leg4" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff;width: 100px;"></td>
-						</tr>
-						<tr>
-							<td><div style="width:45px;height:30px;border:1px solid #fff;background-color:rgba(170,170,170,0.5);"></div></td>
-							<td><input type="text" id="leg0" value = "  No Data" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff;width: 100px;"></td>
-						</tr>
-					</table></div>
-				</div>
-
-				<script type='text/javascript' src='js/village.js'></script>
-				<script type='text/javascript' src='js/level2.js'></script>
-				<script type='text/javascript' src='js/level4.js'></script>
+				<div id="base"></div>
 				<script type='text/javascript' src='js/osgis.js'></script>
-				
-			</div>
+			</div>		
 		</div>
+		<div id = "legdiv"><table id = "legend">
+			<tr><td>Farmers</td></tr>
+			<tr>
+				<td><div style="width:45px;height:30px;border:1px solid #fff;background-color: rgba(203, 231, 225,.7);"></div></td>
+				<td><input type="text" id="leg1" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff; width: 100px;"></td>
+			</tr>
+			<tr>
+				<td><div style="width:45px;height:30px;border:1px solid #fff;background-color:rgba(137, 189, 177,.7);"></div></td>
+				<td><input type="text" id="leg2" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff;width: 100px;"></td>
+			</tr>
+			<tr>
+				<td><div style="width:45px;height:30px;border:1px solid #fff;background-color:rgba(79, 135, 122,.7);"></div></td>
+				<td><input type="text" id="leg3" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff;width: 100px;"></td>
+			</tr>
+			<tr>
+				<td><div style="width:45px;height:30px;border:1px solid #fff;background-color:rgba(38, 92, 79,.7);"></div></td>
+				<td><input type="text" id="leg4" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff;width: 100px;"></td>
+			</tr>
+			<tr>
+				<td><div style="width:45px;height:30px;border:1px solid #fff;background-color:rgba(170,170,170,0.5);"></div></td>
+				<td><input type="text" id="leg0" value = "No Data" readonly style="border:0; background-color:rgba(255, 255, 255,.0); color:#fff;width: 100px;"></td>
+			</tr>
+		</table></div>
 	</body>
 </html>

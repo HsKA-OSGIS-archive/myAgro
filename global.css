@@ -4,7 +4,7 @@ html, body {
 	border: 0;
 	font-size: 12px;
 	height: 100%;
-	font-family: Arial, Tahoma, sans-serif;
+	font-family: Verdana, Geneva, sans-serif;
 	background: #fff;
 	color: #343434;
 	overflow: hidden;
@@ -21,14 +21,16 @@ table {
 p { line-height: 1.25em; margin-bottom: 20px; color: #444; }
 
 a.close {
+	position:absolute;
 	display: inline-block;
-	background: #5574b4;
+	background: #5e8760;
 	padding: 10px 8px;
 	color: #fff;
 	font-weight: bold;
 	font-size: 1.4em;
 	text-decoration: none;
 	margin-bottom: 6px;
+	bottom:10px;
 }
 
 #base{
@@ -40,64 +42,19 @@ a.close {
 	overflow: hidden;
 }
 
-#add{
+#add, #about, #dist, #login{
 	display: block;
 	width: 328px;
-	background: #fff;
+	height: 98%;
+	background: #aaa;
 	padding: 10px 11px;
-	padding-top: 35px;
+	padding-top: 10px;
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: 90%;
 	overflow: scroll;
 	overflow-x: hidden;
 	z-index: 0;
-}
-
-#about{
-	display: block;
-	width: 328px;
-	background: #fff;
-	padding: 10px 11px;
-	padding-top: 35px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 90%;
-	overflow: scroll;
-	overflow-x: hidden;
-	z-index: 1;
-}
-
-#login{
-	display: block;
-	width: 328px;
-	background: #fff;
-	padding: 10px 11px;
-	padding-top: 35px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 90%;
-	overflow: scroll;
-	overflow-x: hidden;
-	z-index: 1;
-}
-
-#dist {
-	display: block;
-	width: 328px;
-	background: #fff;
-	padding: 10px 11px;
-	padding-top: 35px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 90%;
-	overflow: scroll;
-	overflow-x: hidden;
-	z-index: 1;
 }
 
 #mainpage {
@@ -128,11 +85,30 @@ a.close {
 	margin-bottom: 11px;
 }
 
+.bar rect {
+  fill: #5e8760;
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #fff;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
 #navigation { list-style: none; }
-#navigation li { display: block; margin-bottom: 2px; font-size: 1.4em; font-weight: bold; }
-#navigation li a { display: block; padding: 8px 6px; width: 100%; color: #d1e0f8; text-decoration: none; }
+#navigation li { display: block; margin-bottom: 4px; font-size: 12pt;}
+#navigation li a { display: block; padding: 8px 6px; width: 100%; color: #bec585; text-decoration: none; }
 #navigation li a:hover, #navigation li a.open { color: #fff; background: #484e57; }
 
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
 
 #content {
 	display: block;
@@ -148,9 +124,11 @@ a.close {
 }
 
 #title{
-	margin-left: 20px;
-	color: white;
-	font-size: 20pt;
+	text-align: center;
+	font-weight:100;
+	color: #5e8760;
+	font-size: 16pt;
+	font-style: italic;
 }
 
 #legdiv{
@@ -158,8 +136,32 @@ a.close {
 	position: absolute;
 	right: 20px;
 	top: 20px;
+	font-size: 14pt;
 	z-index: 4;
+	color: white;
 	background-color: rgba(100,100,100,.6);
+}
+
+#charttitle{
+	text-align: center;
+	font-size: 16px;
+	display: none;
+}
+
+#logform{
+	margin-top: 50px;
+	width: 290px;
+	height: 100px;
+	font-size: 12pt;
+	text-align: right;
+}
+
+#addform{
+	margin-top: 50px;
+	width: 290px;
+	height: 300px;
+	font-size: 10pt;
+	text-align: right;
 }
 
 .popup .leaflet-popup-content-wrapper{
@@ -170,8 +172,8 @@ a.close {
 }
 
 .popup .leaflet-popup-tip {
-	background: rgba(255,255,255,.8);
-	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	width: 0px;
+	height:0px;
 }
 
 .popup .leaflet-popup-content {
