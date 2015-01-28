@@ -162,7 +162,7 @@ $( "#addfeature" ).submit(function( event ) {
 		field = $form.find( "#fieldsize" ).val();
 
 	// Send the data using post
-	var posting = $.post( "../OSGIS/php/createfile.php", { agent: agent, lat: lat, lng: lng, farmer: farmer, crop: crop, field: field } );
+	var posting = $.post( "./php/createfile.php", { agent: agent, lat: lat, lng: lng, farmer: farmer, crop: crop, field: field } );
  
 	// Put the results in a div
 	posting.done(function( output ) {
